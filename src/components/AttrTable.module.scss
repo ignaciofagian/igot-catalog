@@ -1,0 +1,45 @@
+.attribute {
+	font-family: monospace;
+}
+
+.tableFixed {
+	width: 100%;
+}
+
+.tableFixed th:nth-child(1),
+.tableFixed td:nth-child(1) {
+	width: 125px;
+}
+
+.tableFixed th:nth-child(2),
+.tableFixed td:nth-child(2) {
+	width: 225px;
+}
+
+.tableFixed th:nth-child(4),
+.tableFixed td:nth-child(4) {
+	width: 75px;
+}
+
+.tableFixed thead,
+.tableFixed tbody tr {
+	display: table;
+	width: 100%;
+	table-layout: fixed;
+}
+
+.tableFixed tbody {
+	display: block;
+	overflow-y: auto;
+	table-layout: fixed;
+	max-height: calc(100vh - 260px);
+}
+
+.action {
+	padding: 0px 6px;
+  margin-right: 7px;
+}
+
+.action:nth-last-child {
+	margin-right: 0;
+}
