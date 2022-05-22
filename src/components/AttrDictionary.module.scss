@@ -4,6 +4,7 @@
 
 .tableFixed {
 	width: 100%;
+	margin-bottom: 0px;
 }
 
 .tableFixed th:nth-child(1),
@@ -18,7 +19,7 @@
 
 .tableFixed th:nth-child(3),
 .tableFixed td:nth-child(3) {
-  text-align: right;
+	text-align: right;
 	width: 75px;
 }
 
@@ -33,12 +34,12 @@
 	display: block;
 	overflow-y: auto;
 	table-layout: fixed;
-	max-height: calc(100vh - 260px);
+	max-height: calc(100vh - 350px);
 }
 
 .action {
 	padding: 0px 6px;
-  margin-right: 7px;
+	margin-right: 7px;
 }
 
 .action:nth-last-child {

@@ -3,6 +3,10 @@ import { Button, Card, Input, Row, Col, Container, Alert } from 'reactstrap';
 import Autosuggest from 'react-autosuggest';
 import style from './AttrSuggest.module.scss';
 import { AttrParts, AttrResult, calculate } from '../utils/attrCalculator';
+import classnames from 'classnames';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus } from '@fortawesome/free-solid-svg-icons';
+import AttrEdit, { IEditModal } from './AttrEdit';
 
 const theme = {
 	suggestionsContainer: style.suggestionsContainer,
@@ -13,17 +17,12 @@ const theme = {
 	input: style.input,
 };
 
-const dummyData = [
-	{ id: 1, name: 'data test 1' },
-	{ id: 1, name: 'data test 2' },
-	{ id: 1, name: 'data test 3' },
-];
-export default function AttrSuggest({ value, onChange }: any) {
+export default function AttrSuggest({ value, onChange, toggleTable }: any) {
+
 	const [suggestions, setSuggestions] = useState<any>([]);
 	const [result, setResult] = useState<AttrResult | null>(null);
 
 	const onSuggestionsFetchRequested = (): any => {
-		//setSuggestions(dummyData);
 		setSuggestions([]);
 	};
 	const onSuggestionsClearRequested = () => {
@@ -44,10 +43,17 @@ export default function AttrSuggest({ value, onChange }: any) {
 		onChange(newValue);
 	};
 
+	const handleClear = () => {
+		setResult(null);
+		toggleTable(false);
+	};
+
 	const handleSearch = () => {
 		const attrResult = calculate(value);
 		setResult(attrResult);
+		toggleTable(true);
 	};
+
 
 	return (
 		<div>
@@ -67,8 +73,11 @@ export default function AttrSuggest({ value, onChange }: any) {
 					)}
 					inputProps={{ value, onChange: onChangeInput }}
 				/>
-				<Button onClick={handleSearch} disabled={value.length < 2} color="primary">
+				<Button onClick={handleSearch} disabled={value.length < 2} color="primary" className="me-2">
 					Buscar
+				</Button>
+				<Button onClick={handleClear} disabled={value.length === 0} color="light">
+					Limpiar
 				</Button>
 			</div>
 			{result != null && result.status == 200 && <SuggestResult value={result} />}
@@ -79,6 +88,7 @@ export default function AttrSuggest({ value, onChange }: any) {
 					))}
 				</Alert>
 			)}
+		
 		</div>
 	);
 }
@@ -86,7 +96,7 @@ export default function AttrSuggest({ value, onChange }: any) {
 export function SuggestResult({ value }: { value: AttrResult }) {
 	const attribute = value?.parts?.map((e) => e.current).join('');
 	return (
-		<Card body className="mt-2 p-2">
+		<Card body className={classnames('mt-2 p-2')}>
 			<Row>
 				<Col lg="8">
 					<div className={style.result}>
@@ -104,6 +114,10 @@ export function SuggestResult({ value }: { value: AttrResult }) {
 				</Col>
 				<Col lg="4" style={{ borderLeft: 'solid 1px lightgray' }}>
 					<div>Cantidad de letras: {attribute?.length}</div>
+					<Button outline size="sm" color="primary">
+						<FontAwesomeIcon icon={faPlus} className="me-1" />
+						Agregar nuevo
+					</Button>
 				</Col>
 			</Row>
 		</Card>

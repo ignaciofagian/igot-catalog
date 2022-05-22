@@ -1,17 +1,8 @@
-import { useState } from 'react';
 import { Card, CardBody, Container, Row, Col } from 'reactstrap';
+import Attributes from '../components/Attributes';
 import AttrRules from '../components/AttrRules';
-import AttrSuggest from '../components/AttrSuggest';
-import AttrTable from '../components/AttrTable';
 
 export default function HomePage() {
-	const [state, setState] = useState({
-		text: '',
-	});
-
-	const handleOnChange = (e: any, a: any) => {
-		setState({ ...state, text: e });
-	};
 	return (
 		<>
 			<Container>
@@ -22,8 +13,7 @@ export default function HomePage() {
 					<Col lg="8">
 						<Card>
 							<CardBody>
-								<AttrSuggest value={state.text} onChange={handleOnChange} />
-                <AttrTable />
+								<Attributes />
 							</CardBody>
 						</Card>
 					</Col>

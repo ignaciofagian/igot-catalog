@@ -5,6 +5,14 @@ class AttributeController {
 			{ id: 2, name: 'Proyecto', abbreviature: 'Proy', description: 'Proyecto' },
 			{ id: 3, name: 'Programa', abbreviature: 'Prog', description: 'Programa' },
 			{ id: 4, name: 'Año', abbreviature: 'Ano', description: 'Año' },
+      { id: 1, name: 'Fecha', abbreviature: 'Fch', description: 'Fecha' },
+			{ id: 2, name: 'Proyecto', abbreviature: 'Proy', description: 'Proyecto' },
+			{ id: 3, name: 'Programa', abbreviature: 'Prog', description: 'Programa' },
+			{ id: 4, name: 'Año', abbreviature: 'Ano', description: 'Año' },
+      { id: 1, name: 'Fecha', abbreviature: 'Fch', description: 'Fecha' },
+			{ id: 2, name: 'Proyecto', abbreviature: 'Proy', description: 'Proyecto' },
+			{ id: 3, name: 'Programa', abbreviature: 'Prog', description: 'Programa' },
+			{ id: 4, name: 'Año', abbreviature: 'Ano', description: 'Año' },
 		];
 	}
 

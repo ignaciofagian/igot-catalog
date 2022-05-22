@@ -1,30 +1,29 @@
-import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faPencil, faPlus, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import classNames from 'classnames';
 import { useState, useEffect } from 'react';
 import { Button, Table } from 'reactstrap';
 import { Attribute, getAttributeList } from '../services/api';
 import style from './AttrTable.module.scss';
 
-export default function AttrTable() {
-	const [attributes, setAttributes] = useState<Attribute[] | null>(null);
-
-	useEffect(() => {
-		getAttributeList().then((attrs: Attribute[]) => setAttributes(attrs));
-	}, []);
-
+export default function AttrTable({ attributes,  toggled, toggleEdit }: any) {
 	const handleEdit = (event: any) => {
+		toggleEdit(event);
+	};
+
+	const handleDelete = (event: any) => {
 		const id = event.currentTarget.getAttribute('data-id');
 		console.log(id);
 	};
 
-	const handleDelete = (event: any) => {
-    const id = event.currentTarget.getAttribute('data-id');
-		console.log(id);
-  };
-
 	return (
 		<div className="mt-3">
-			<Table size="sm" striped hover className={style.tableFixed}>
+			<Table
+				size="sm"
+				striped
+				hover
+				className={classNames(style.tableFixed, { [style.toggled]: !toggled })}
+			>
 				<thead>
 					<tr>
 						<th>Atributo</th>
