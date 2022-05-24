@@ -3,13 +3,19 @@ import * as http from 'http';
 import * as cors from 'cors';
 import { json } from 'body-parser';
 import router from './routes';
+import ctrlAttribute from './controllers/attribute';
 
 export class App {
 	private appServer: any;
 
-	async initialize() {}
+	async initialize() {
+		await ctrlAttribute.initialize();
+	}
 
 	async runServer() {
+		// initialize ctrls
+		await this.initialize();
+
 		this.appServer = express();
 		this.appServer.use(
 			cors({

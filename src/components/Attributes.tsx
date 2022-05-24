@@ -12,6 +12,14 @@ export default function Attributes() {
 		text: '',
 	});
 
+  useEffect(() => {
+		serverAttributes();
+	}, []);
+
+	const serverAttributes = () => {
+		return getAttributeList().then((attrs: Attribute[]) => setAttributes(attrs));
+	};
+
 	useEffect(() => {
 		getAttributeList().then((attrs: Attribute[]) => setAttributes(attrs));
 	}, []);

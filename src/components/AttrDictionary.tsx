@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import {
 	Button,
 	Col,
+	FormFeedback,
+	FormGroup,
 	Input,
 	Label,
 	Modal,
@@ -13,7 +15,14 @@ import {
 	Row,
 	Table,
 } from 'reactstrap';
-import { Abbreviature, getAbbreviatureList } from '../services/api';
+import {
+	Abbreviature,
+	getAbbreviatureList,
+	postAddAbbreviature,
+	postDeleteAbbreviature,
+	postEditAbbreviature,
+} from '../services/api';
+import { store } from '../utils/attrCalculator';
 import style from './AttrDictionary.module.scss';
 
 export default function AttrDictionary() {
@@ -21,17 +30,34 @@ export default function AttrDictionary() {
 	const [abbreviatures, setAbbreviatures] = useState<Abbreviature[] | null>(null);
 
 	useEffect(() => {
-		getAbbreviatureList().then((abbs: Abbreviature[]) => setAbbreviatures(abbs));
+		serverAbbreviatures();
 	}, []);
+
+	useEffect(() => {
+		store.abbreviatures = abbreviatures;
+	}, [abbreviatures]);
+
+	const serverAbbreviatures = () => {
+		return getAbbreviatureList().then((abbs: Abbreviature[]) => setAbbreviatures(abbs));
+	};
 
 	const handleDelete = (event: any) => {
 		const id = event.currentTarget.getAttribute('data-id');
-		console.log(id);
+		const abbrev = abbreviatures?.find((abb: Abbreviature) => abb.id == id);
+		window.message({
+			text: `Esta seguro que desea eliminar la abreviatura ${abbrev?.abbreviature} (${abbrev?.description})?`,
+			onAction: (accept: any) => {
+				if (accept) {
+					postDeleteAbbreviature(id).then((res) => {
+						serverAbbreviatures();
+					});
+				}
+			},
+		});
 	};
 
 	const handleToggleEdit = (event?: any) => {
 		const id = +event?.currentTarget.getAttribute('data-id');
-    debugger;
 		if (id) {
 			const abbrev = abbreviatures?.find((abb: Abbreviature) => abb.id === id);
 			setEditModal({ open: true, data: abbrev });
@@ -91,31 +117,52 @@ interface IEditModal {
 	data?: {
 		id: number;
 		abbreviature?: string;
-		name?: string;
+		description?: string;
 	};
 }
 
 function AbbrevEdit({ open, data, toggle }: any) {
 	const [isNew, setIsNew] = useState(true);
-	const [state, setState] = useState<any>({ id: 0, abbreviature: '', description: '' });
+	const [fields, setFields] = useState({ id: 0, abbreviature: '', description: '' });
+	const [state, setState] = useState<any>({ fieldErrors: {} });
 
 	useEffect(() => {
+		setState({ ...state, fieldErrors: {} });
 		setIsNew(!data);
 		if (data) {
-			setState(data);
+			setFields(data);
 		}
 	}, [data]);
 
 	const handleSave = () => {
-		toggle();
+		const errors: any = {};
+		if (fields.abbreviature?.length < 2) {
+			errors.abbreviature = 'La abreviatura es demasiada corto';
+		}
+		if (fields.description?.length < 2) {
+			errors.description = 'La descripcion es demasiada corto';
+		}
+
+		if (Object.keys(errors).length) {
+			setState({ ...state, fieldErrors: errors });
+		} else {
+			let postService = null;
+			if (isNew) postService = postAddAbbreviature;
+			else postService = postEditAbbreviature;
+
+			postService(fields).then(async (res) => {
+				toggle();
+			});
+		}
 	};
 
 	const handleChange = (event: any) => {
 		const name = event?.currentTarget.getAttribute('data-name');
 		const value = event?.target.value;
-		setState({ ...state, [name]: value });
+		setFields({ ...fields, [name]: value });
 	};
-
+  
+	const errors = state.fieldErrors;
 	return (
 		<Modal isOpen={open} toggle={toggle} unmountOnClose centered>
 			<ModalHeader toggle={toggle}>
@@ -124,24 +171,30 @@ function AbbrevEdit({ open, data, toggle }: any) {
 			<ModalBody>
 				<Row>
 					<Col>
-						<Label>Abreviatura</Label>
-						<Input
-							data-name="abbreviature"
-							type="text"
-							value={state.abbreviature}
-							onChange={handleChange}
-						/>
+						<FormGroup>
+							<Label>Abreviatura</Label>
+							<Input
+								type="text"
+								data-name="abbreviature"
+								value={fields.abbreviature}
+								onChange={handleChange}
+							/>
+							<FormFeedback>{errors.abbreviature}</FormFeedback>
+						</FormGroup>
 					</Col>
 				</Row>
 				<Row>
 					<Col>
-						<Label>Descripcion</Label>
-						<Input
-							data-name="description"
-							type="text"
-							value={state.description}
-							onChange={handleChange}
-						/>
+						<FormGroup>
+							<Label>Descripcion</Label>
+							<Input
+								type="text"
+								data-name="description"
+								value={fields.description}
+								onChange={handleChange}
+							/>
+							<FormFeedback>{errors.description}</FormFeedback>
+						</FormGroup>
 					</Col>
 				</Row>
 			</ModalBody>

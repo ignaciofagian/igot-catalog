@@ -1,11 +1,6 @@
-import { getAbbreviatureList } from '../services/api';
-
-const tempAbbreviatures = [
-	{ id: 1, name: 'Fecha', abbreviature: 'Fch', description: 'Fecha' },
-	{ id: 2, name: 'Proyecto', abbreviature: 'Proy', description: 'Proyecto' },
-	{ id: 3, name: 'Programa', abbreviature: 'Prog', description: 'Programa' },
-	{ id: 4, name: 'Año', abbreviature: 'Ano', description: 'Año' },
-];
+const store = {
+	abbreviatures: [] as any,
+};
 
 interface Result {
 	status: 200 | 400;
@@ -30,7 +25,7 @@ export function calculate(raw: string): AttrResult {
 	const parts: AttrParts[] = [];
 	if (result.status === 200) {
 		words.forEach((word: string) => {
-			const abb = tempAbbreviatures.find((e: any) => {
+			const abb = store.abbreviatures.find((e: any) => {
 				if (e.name.toUpperCase() === word.toLocaleUpperCase()) {
 					return e;
 				}
@@ -57,7 +52,6 @@ export function calculate(raw: string): AttrResult {
 	return { status: 400, errors: [result?.description ?? ''] };
 }
 
-
 function validateInputWords(raw: string): [Result, any?] {
 	const words = raw
 		.split(' ')
@@ -72,3 +66,5 @@ function validateInputWords(raw: string): [Result, any?] {
 
 	return [{ status: 200 }, words];
 }
+
+export { store };

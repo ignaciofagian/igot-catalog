@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { useState, useEffect } from 'react';
 import { Button, Table } from 'reactstrap';
-import { Attribute, getAttributeList } from '../services/api';
+import { Attribute, getAttributeList, postDeleteAttribute } from '../services/api';
 import style from './AttrTable.module.scss';
 
 export default function AttrTable({ attributes,  toggled, toggleEdit }: any) {
@@ -13,7 +13,17 @@ export default function AttrTable({ attributes,  toggled, toggleEdit }: any) {
 
 	const handleDelete = (event: any) => {
 		const id = event.currentTarget.getAttribute('data-id');
-		console.log(id);
+    const attr = attributes?.find((attr: Attribute) => attr.id == id);
+		window.message({
+			text: `Esta seguro que desea eliminar la abreviatura ${attr?.attribute} (${attr?.description})?`,
+			onAction: (accept: any) => {
+				if (accept) {
+					postDeleteAttribute(id).then((res) => {
+						//serverAttributes();
+					});
+				}
+			},
+		});
 	};
 
 	return (

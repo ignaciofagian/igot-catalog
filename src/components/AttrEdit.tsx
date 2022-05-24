@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import {
 	Button,
 	Col,
+	FormFeedback,
+	FormGroup,
 	Input,
 	Label,
 	Modal,
@@ -11,6 +13,7 @@ import {
 	Row,
 	Spinner,
 } from 'reactstrap';
+import { postAddAttribute, postEditAttribute } from '../services/api';
 import { AttrParts, AttrResult, calculate } from '../utils/attrCalculator';
 import style from './AttrEdit.module.scss';
 
@@ -26,10 +29,11 @@ export interface IEditModal {
 
 export default function AttrEdit({ open, data, toggle }: any) {
 	const [isNew, setIsNew] = useState(true);
-	const [state, setState] = useState<any>({ loadingAttr: false, errors: null });
-	const [fields, setFields] = useState<any>({ id: 0, abbreviature: '', description: '' });
+	const [state, setState] = useState<any>({ loadingAttr: false, errors: null, fieldErrors: {} });
+	const [fields, setFields] = useState<any>({ id: 0, attribute: '', name: '', description: '' });
 
 	useEffect(() => {
+    setState({...state, fieldErrors : {}})
 		setIsNew(!data);
 		if (data) {
 			setFields(data);
@@ -37,7 +41,25 @@ export default function AttrEdit({ open, data, toggle }: any) {
 	}, [data]);
 
 	const handleSave = () => {
-		toggle();
+		const errors: any = {};
+		if (fields.name?.length < 2) {
+			errors.name = 'El nombre es demasiado corto';
+		}
+		if (fields.description?.length < 2) {
+			errors.description = 'La descripcion es demasiada corto';
+		}
+
+		if (Object.keys(errors).length) {
+			setState({ ...state, fieldErrors: errors });
+		} else {
+      let postService = null;
+			if (isNew) postService = postAddAttribute;
+			else postService = postEditAttribute;
+
+			postService(fields).then(async (res) => {
+				toggle();
+			});
+		}
 	};
 
 	const handleChange = (event: any) => {
@@ -61,9 +83,13 @@ export default function AttrEdit({ open, data, toggle }: any) {
 				}
 			}
 		}
+		//clear error state
+		setState({ ...state, fieldErrors: { ...state.fieldErrors, [name]: undefined } });
+		// update field state
 		setFields({ ...fields, [name]: value, ...customFields });
 	};
 
+	const errors = state.fieldErrors;
 	return (
 		<Modal isOpen={open} toggle={toggle} unmountOnClose centered>
 			<ModalHeader toggle={toggle}>
@@ -72,8 +98,17 @@ export default function AttrEdit({ open, data, toggle }: any) {
 			<ModalBody>
 				<Row>
 					<Col>
-						<Label>Nombre (Max. 3 palabras)</Label>
-						<Input data-name="name" type="text" value={fields.name} onChange={handleChange} />
+						<FormGroup>
+							<Label>Nombre (Max. 3 palabras)</Label>
+							<Input
+								type="text"
+								invalid={!!errors.name}
+								data-name="name"
+								value={fields.name}
+								onChange={handleChange}
+							/>
+							<FormFeedback>{errors.name}</FormFeedback>
+						</FormGroup>
 					</Col>
 				</Row>
 				<Row>
@@ -94,13 +129,17 @@ export default function AttrEdit({ open, data, toggle }: any) {
 				</Row>
 				<Row>
 					<Col>
-						<Label>Descripcion</Label>
-						<Input
-							data-name="description"
-							type="text"
-							value={fields.description}
-							onChange={handleChange}
-						/>
+						<FormGroup>
+							<Label>Descripcion</Label>
+							<Input
+								type="text"
+								data-name="description"
+								invalid={!!errors.description}
+								value={fields.description}
+								onChange={handleChange}
+							/>
+							<FormFeedback>{errors.description}</FormFeedback>
+						</FormGroup>
 					</Col>
 				</Row>
 			</ModalBody>
