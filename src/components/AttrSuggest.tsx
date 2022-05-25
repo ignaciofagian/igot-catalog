@@ -6,7 +6,6 @@ import { AttrParts, AttrResult, calculate } from '../utils/attrCalculator';
 import classnames from 'classnames';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
-import AttrEdit, { IEditModal } from './AttrEdit';
 
 const theme = {
 	suggestionsContainer: style.suggestionsContainer,
@@ -17,21 +16,24 @@ const theme = {
 	input: style.input,
 };
 
-export default function AttrSuggest({ value, onChange, toggleTable }: any) {
-
+export default function AttrSuggest({ value, onChange, toggleTable, toggleEdit }: any) {
 	const [suggestions, setSuggestions] = useState<any>([]);
 	const [result, setResult] = useState<AttrResult | null>(null);
 
 	const onSuggestionsFetchRequested = (): any => {
 		setSuggestions([]);
 	};
+
 	const onSuggestionsClearRequested = () => {
 		setSuggestions([]);
 	};
+
 	const onSuggestionSelected = (value: any) => {};
+
 	const getSuggestionValue = (suggestion: any) => {
 		return `${suggestion.id} ${suggestion.name}`;
 	};
+
 	const renderSuggestion = (suggestion: any, { query }: any) => {
 		return (
 			<div>
@@ -39,21 +41,28 @@ export default function AttrSuggest({ value, onChange, toggleTable }: any) {
 			</div>
 		);
 	};
+
 	const onChangeInput = (event: any, { newValue, method }: any) => {
 		onChange(newValue);
+		if (newValue?.length > 1) {
+			const attrResult = calculate(newValue);
+			setTimeout(() => {
+				if (value !== '') {
+					setResult(attrResult);
+					toggleTable(true);
+				}
+			}, 50);
+		} else {
+			setResult(null);
+			toggleTable(false);
+		}
 	};
 
 	const handleClear = () => {
 		setResult(null);
 		toggleTable(false);
+		onChange('');
 	};
-
-	const handleSearch = () => {
-		const attrResult = calculate(value);
-		setResult(attrResult);
-		toggleTable(true);
-	};
-
 
 	return (
 		<div>
@@ -73,11 +82,18 @@ export default function AttrSuggest({ value, onChange, toggleTable }: any) {
 					)}
 					inputProps={{ value, onChange: onChangeInput }}
 				/>
-				<Button onClick={handleSearch} disabled={value.length < 2} color="primary" className="me-2">
-					Buscar
-				</Button>
 				<Button onClick={handleClear} disabled={value.length === 0} color="light">
 					Limpiar
+				</Button>
+				<Button
+					onClick={(e: any) => toggleEdit(e, value)}
+					outline
+					size="sm"
+					color="primary"
+					className="ms-4"
+				>
+					<FontAwesomeIcon icon={faPlus} className="me-1" />
+					Agregar nuevo
 				</Button>
 			</div>
 			{result != null && result.status == 200 && <SuggestResult value={result} />}
@@ -88,7 +104,6 @@ export default function AttrSuggest({ value, onChange, toggleTable }: any) {
 					))}
 				</Alert>
 			)}
-		
 		</div>
 	);
 }
@@ -114,10 +129,6 @@ export function SuggestResult({ value }: { value: AttrResult }) {
 				</Col>
 				<Col lg="4" style={{ borderLeft: 'solid 1px lightgray' }}>
 					<div>Cantidad de letras: {attribute?.length}</div>
-					<Button outline size="sm" color="primary">
-						<FontAwesomeIcon icon={faPlus} className="me-1" />
-						Agregar nuevo
-					</Button>
 				</Col>
 			</Row>
 		</Card>

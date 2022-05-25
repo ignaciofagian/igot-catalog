@@ -2,6 +2,7 @@ import { faPencil, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useEffect, useState } from 'react';
 import {
+	Alert,
 	Button,
 	Col,
 	FormFeedback,
@@ -17,30 +18,13 @@ import {
 } from 'reactstrap';
 import {
 	Abbreviature,
-	getAbbreviatureList,
 	postAddAbbreviature,
 	postDeleteAbbreviature,
 	postEditAbbreviature,
 } from '../services/api';
-import { store } from '../utils/attrCalculator';
 import style from './AttrDictionary.module.scss';
 
-export default function AttrDictionary() {
-	const [editModal, setEditModal] = useState<IEditModal>({ open: false });
-	const [abbreviatures, setAbbreviatures] = useState<Abbreviature[] | null>(null);
-
-	useEffect(() => {
-		serverAbbreviatures();
-	}, []);
-
-	useEffect(() => {
-		store.abbreviatures = abbreviatures;
-	}, [abbreviatures]);
-
-	const serverAbbreviatures = () => {
-		return getAbbreviatureList().then((abbs: Abbreviature[]) => setAbbreviatures(abbs));
-	};
-
+export default function AttrDictionary({ abbreviatures, toggleEdit, serverReload }: any) {
 	const handleDelete = (event: any) => {
 		const id = event.currentTarget.getAttribute('data-id');
 		const abbrev = abbreviatures?.find((abb: Abbreviature) => abb.id == id);
@@ -49,19 +33,11 @@ export default function AttrDictionary() {
 			onAction: (accept: any) => {
 				if (accept) {
 					postDeleteAbbreviature(id).then((res) => {
-						serverAbbreviatures();
+						serverReload('all');
 					});
 				}
 			},
 		});
-	};
-
-	const handleToggleEdit = (event?: any) => {
-		const id = +event?.currentTarget.getAttribute('data-id');
-		if (id) {
-			const abbrev = abbreviatures?.find((abb: Abbreviature) => abb.id === id);
-			setEditModal({ open: true, data: abbrev });
-		} else setEditModal({ open: !editModal.open });
 	};
 
 	return (
@@ -70,15 +46,15 @@ export default function AttrDictionary() {
 				<thead>
 					<tr>
 						<th>Abreviatura</th>
-						<th>Descripción</th>
+						<th>Nombre</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					{abbreviatures?.map((e: Abbreviature) => (
-						<tr key={e.id}>
+					<tr key={`abbrev-${e.id}`}>
 							<td>{e.abbreviature}</td>
-							<td>{e.description}</td>
+							<td>{e.name}</td>
 							<td>
 								<div className="text-right">
 									<Button
@@ -87,7 +63,7 @@ export default function AttrDictionary() {
 										size="sm"
 										color="primary"
 										className={style.action}
-										onClick={handleToggleEdit}
+										onClick={toggleEdit}
 									>
 										<FontAwesomeIcon icon={faPencil} size="xs" />
 									</Button>
@@ -107,12 +83,11 @@ export default function AttrDictionary() {
 					))}
 				</tbody>
 			</Table>
-			<AbbrevEdit toggle={handleToggleEdit} {...editModal} />
 		</>
 	);
 }
 
-interface IEditModal {
+export interface IEditModal {
 	open: boolean;
 	data?: {
 		id: number;
@@ -121,9 +96,10 @@ interface IEditModal {
 	};
 }
 
-function AbbrevEdit({ open, data, toggle }: any) {
+export function AbbrevEdit({ open, data, toggle }: any) {
+	const [alert, setAlert] = useState<string | null>(null!);
 	const [isNew, setIsNew] = useState(true);
-	const [fields, setFields] = useState({ id: 0, abbreviature: '', description: '' });
+	const [fields, setFields] = useState({ id: 0, name: '', abbreviature: '', description: '' });
 	const [state, setState] = useState<any>({ fieldErrors: {} });
 
 	useEffect(() => {
@@ -131,16 +107,18 @@ function AbbrevEdit({ open, data, toggle }: any) {
 		setIsNew(!data);
 		if (data) {
 			setFields(data);
+		} else {
+			setFields({ id: 0, name: '', abbreviature: '', description: '' });
 		}
 	}, [data]);
 
 	const handleSave = () => {
 		const errors: any = {};
 		if (fields.abbreviature?.length < 2) {
-			errors.abbreviature = 'La abreviatura es demasiada corto';
+			errors.abbreviature = 'La abreviatura es muy corta';
 		}
-		if (fields.description?.length < 2) {
-			errors.description = 'La descripcion es demasiada corto';
+		if (fields.name?.length < 2) {
+			errors.name = 'La descripción es demasiada corta';
 		}
 
 		if (Object.keys(errors).length) {
@@ -158,10 +136,13 @@ function AbbrevEdit({ open, data, toggle }: any) {
 
 	const handleChange = (event: any) => {
 		const name = event?.currentTarget.getAttribute('data-name');
-		const value = event?.target.value;
+		let value = event?.target.value;
+		//clear error state
+		setState({ ...state, fieldErrors: { ...state.fieldErrors, [name]: undefined } });
+		// update fields
 		setFields({ ...fields, [name]: value });
 	};
-  
+
 	const errors = state.fieldErrors;
 	return (
 		<Modal isOpen={open} toggle={toggle} unmountOnClose centered>
@@ -171,6 +152,7 @@ function AbbrevEdit({ open, data, toggle }: any) {
 			<ModalBody>
 				<Row>
 					<Col>
+						{alert && <Alert color="danger">{alert}</Alert>}
 						<FormGroup>
 							<Label>Abreviatura</Label>
 							<Input
@@ -178,6 +160,7 @@ function AbbrevEdit({ open, data, toggle }: any) {
 								data-name="abbreviature"
 								value={fields.abbreviature}
 								onChange={handleChange}
+								invalid={!!errors.abbreviature}
 							/>
 							<FormFeedback>{errors.abbreviature}</FormFeedback>
 						</FormGroup>
@@ -186,14 +169,15 @@ function AbbrevEdit({ open, data, toggle }: any) {
 				<Row>
 					<Col>
 						<FormGroup>
-							<Label>Descripcion</Label>
+							<Label>Nombre</Label>
 							<Input
 								type="text"
-								data-name="description"
-								value={fields.description}
+								data-name="name"
+								value={fields.name}
 								onChange={handleChange}
+								invalid={!!errors.name}
 							/>
-							<FormFeedback>{errors.description}</FormFeedback>
+							<FormFeedback>{errors.name}</FormFeedback>
 						</FormGroup>
 					</Col>
 				</Row>

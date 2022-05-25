@@ -3,6 +3,7 @@ import client, { Result } from '.';
 /** Abbreviature */
 export interface Abbreviature {
 	id: number;
+  name: string;
 	abbreviature: string;
 	description: string;
 }
@@ -12,19 +13,11 @@ export function getAbbreviatureList(): Promise<Abbreviature[]> {
 }
 
 export function postAddAbbreviature(abbreviature: Abbreviature): Promise<Result> {
-	return client
-		.post(`/abbreviature/add`, {
-			abbreviature,
-		})
-		.then((res) => res.data);
+	return client.post(`/abbreviature/add`, { ...abbreviature }).then((res) => res.data);
 }
 
 export function postEditAbbreviature(abbreviature: Abbreviature): Promise<Result> {
-	return client
-		.post(`/abbreviature/edit`, 
-			abbreviature,
-		)
-		.then((res) => res.data);
+	return client.post(`/abbreviature/edit`, { ...abbreviature }).then((res) => res.data);
 }
 
 export function postDeleteAbbreviature(id: number): Promise<Result> {
@@ -48,19 +41,11 @@ export function getAttributeList(): Promise<Attribute[]> {
 }
 
 export function postAddAttribute(attribute: Attribute): Promise<Result> {
-	return client
-		.post(`/attribute/add`, {
-			attribute,
-		})
-		.then((res) => res.data);
+	return client.post(`/attribute/add`, { ...attribute }).then((res) => res.data);
 }
 
 export function postEditAttribute(attribute: Attribute): Promise<Result> {
-	return client
-		.post(`/attribute/edit`, {
-			attribute,
-		})
-		.then((res) => res.data);
+	return client.post(`/attribute/edit`, { ...attribute }).then((res) => res.data);
 }
 
 export function postDeleteAttribute(id: number): Promise<Result> {

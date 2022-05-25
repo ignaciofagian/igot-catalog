@@ -6,20 +6,20 @@ import { Button, Table } from 'reactstrap';
 import { Attribute, getAttributeList, postDeleteAttribute } from '../services/api';
 import style from './AttrTable.module.scss';
 
-export default function AttrTable({ attributes,  toggled, toggleEdit }: any) {
+export default function AttrTable({ attributes, toggled, toggleEdit, serverReload }: any) {
 	const handleEdit = (event: any) => {
 		toggleEdit(event);
 	};
 
 	const handleDelete = (event: any) => {
 		const id = event.currentTarget.getAttribute('data-id');
-    const attr = attributes?.find((attr: Attribute) => attr.id == id);
+		const attr = attributes?.find((attr: Attribute) => attr.id == id);
 		window.message({
 			text: `Esta seguro que desea eliminar la abreviatura ${attr?.attribute} (${attr?.description})?`,
 			onAction: (accept: any) => {
 				if (accept) {
 					postDeleteAttribute(id).then((res) => {
-						//serverAttributes();
+						serverReload('attributes');
 					});
 				}
 			},
@@ -38,13 +38,13 @@ export default function AttrTable({ attributes,  toggled, toggleEdit }: any) {
 					<tr>
 						<th>Atributo</th>
 						<th>Nombre</th>
-						<th>Descripcion</th>
+						<th>Descripción</th>
 						<th></th>
 					</tr>
 				</thead>
 				<tbody>
 					{attributes?.map((e: Attribute) => (
-						<tr key={e.id}>
+						<tr key={`attr-${e.id}`}>
 							<td className={style.attribute}>{e.attribute}</td>
 							<td>{e.name}</td>
 							<td>{e.description}</td>
@@ -79,5 +79,3 @@ export default function AttrTable({ attributes,  toggled, toggleEdit }: any) {
 		</div>
 	);
 }
-
-function AttrEdit() {}

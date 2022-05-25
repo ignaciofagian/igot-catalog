@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import {
+	Alert,
 	Button,
 	Col,
 	FormFeedback,
@@ -29,15 +30,29 @@ export interface IEditModal {
 
 export default function AttrEdit({ open, data, toggle }: any) {
 	const [isNew, setIsNew] = useState(true);
+	const [alert, setAlert] = useState<string | null>(null!);
 	const [state, setState] = useState<any>({ loadingAttr: false, errors: null, fieldErrors: {} });
 	const [fields, setFields] = useState<any>({ id: 0, attribute: '', name: '', description: '' });
 
 	useEffect(() => {
-    setState({...state, fieldErrors : {}})
-		setIsNew(!data);
-		if (data) {
-			setFields(data);
+		setState({ ...state, fieldErrors: {} });
+		setIsNew(!data?.id);
+		const nextData = Object.assign({ id: 0, attribute: '', name: '', description: '' }, data ?? {});
+		if (!data?.id && data?.name) {
+			const attrResult: AttrResult = calculate(data?.name);
+			if (attrResult.status === 200) {
+				const currentAttr = attrResult.parts?.map((e: AttrParts) => e.current).join('');
+				setTimeout(() => {
+					setState((prevState: any) => ({ ...prevState, loadingAttr: false }));
+					setFields((prevFields: any) => ({
+						...prevFields,
+						attribute: currentAttr,
+					}));
+				}, 550);
+				setState({ ...state, loadingAttr: true });
+			}
 		}
+		setFields(nextData);
 	}, [data]);
 
 	const handleSave = () => {
@@ -46,13 +61,13 @@ export default function AttrEdit({ open, data, toggle }: any) {
 			errors.name = 'El nombre es demasiado corto';
 		}
 		if (fields.description?.length < 2) {
-			errors.description = 'La descripcion es demasiada corto';
+			errors.description = 'La descripción es demasiada corta';
 		}
 
 		if (Object.keys(errors).length) {
 			setState({ ...state, fieldErrors: errors });
 		} else {
-      let postService = null;
+			let postService = null;
 			if (isNew) postService = postAddAttribute;
 			else postService = postEditAttribute;
 
@@ -98,6 +113,7 @@ export default function AttrEdit({ open, data, toggle }: any) {
 			<ModalBody>
 				<Row>
 					<Col>
+						{alert && <Alert color="danger">{alert}</Alert>}
 						<FormGroup>
 							<Label>Nombre (Max. 3 palabras)</Label>
 							<Input
@@ -130,7 +146,7 @@ export default function AttrEdit({ open, data, toggle }: any) {
 				<Row>
 					<Col>
 						<FormGroup>
-							<Label>Descripcion</Label>
+							<Label>Descripción</Label>
 							<Input
 								type="text"
 								data-name="description"

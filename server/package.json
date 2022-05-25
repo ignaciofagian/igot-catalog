@@ -17,9 +17,7 @@
 		"cors": "^2.8.5",
 		"express": "^4.17.3",
 		"https-proxy-agent": "^5.0.0",
-		"isomorphic-fetch": "^3.0.0",
-		"lowdb": "^3.0.0",
-		"steno": "^2.1.0"
+		"isomorphic-fetch": "^3.0.0"
 	},
 	"devDependencies": {
 		"@types/cors": "^2.8.12",

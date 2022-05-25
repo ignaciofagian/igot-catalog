@@ -1,13 +1,38 @@
 {
-  "attrIdentity": 15,
-  "abbIdentity": 15,
-  "abbreviatures": [],
+  "attrIdentity": 18,
+  "abbIdentity": 23,
+  "abbreviatures": [
+    {
+      "id": 3,
+      "name": "Programa",
+      "abbreviature": "Prog",
+      "description": "Programa"
+    },
+    {
+      "id": 4,
+      "name": "Año",
+      "abbreviature": "Anio",
+      "description": "Año"
+    },
+    {
+      "id": 22,
+      "name": "Etiqueta",
+      "abbreviature": "Eetq",
+      "description": ""
+    },
+    {
+      "id": 23,
+      "name": "nsadasdsd",
+      "abbreviature": "Nan",
+      "description": ""
+    }
+  ],
   "attributes": [
     {
       "id": 1,
-      "name": "Alcance espacial",
-      "attribute": "AlcEsp",
-      "description": "Alcance espacial"
+      "name": "Alcance espaciala vv",
+      "attribute": "AlcEspVv",
+      "description": "Alcance espacialdd"
     },
     {
       "id": 2,
@@ -18,31 +43,31 @@
     {
       "id": 3,
       "name": "Año construcción",
-      "attribute": "AnoCons",
+      "attribute": "AnioCon",
       "description": "Año construcción"
     },
     {
       "id": 4,
       "name": "Año conformación",
-      "attribute": "AnoConf",
+      "attribute": "AnioCon",
       "description": "Año conformación"
     },
     {
       "id": 5,
       "name": "Cantidad de dormitorios",
-      "attribute": "CantDor",
+      "attribute": "CanDeDor",
       "description": "Cantidad de dormitorios"
     },
     {
       "id": 6,
       "name": "Cantidad viviendas",
-      "attribute": "CantViv",
+      "attribute": "CanViv",
       "description": "Cantidad viviendas"
     },
     {
       "id": 7,
       "name": "Categoría del suelo",
-      "attribute": "CatSue",
+      "attribute": "CatDelSue",
       "description": "Categoría del suelo"
     },
     {
@@ -59,21 +84,15 @@
     },
     {
       "id": 10,
-      "name": "Código conjunto habitacional",
-      "attribute": "CodHab",
+      "name": "Codigo conjunto habitacional",
+      "attribute": "CodConHab",
       "description": "Código habitacional"
     },
     {
       "id": 11,
       "name": "Departamento",
-      "attribute": "Depto",
+      "attribute": "Dep",
       "description": "Departamento"
-    },
-    {
-      "id": 12,
-      "name": "Direccion",
-      "attribute": "Direccion",
-      "description": "Direccion"
     },
     {
       "id": 13,
@@ -84,37 +103,31 @@
     {
       "id": 14,
       "name": "Estado Proyecto Constructivo",
-      "attribute": "EstProyCon",
+      "attribute": "EstProCon",
       "description": "Estado de avance del proyecto constructivo"
     },
     {
       "id": 15,
       "name": "Estado terreno",
-      "attribute": "EstTerr",
+      "attribute": "EstTer",
       "description": "Estado terreno"
     },
     {
       "id": 16,
       "name": "Etapa IOT elaboración",
-      "attribute": "EtaIOTElab",
+      "attribute": "EtaIOTEla",
       "description": "Etapa de los instrumentos de ordenamiento territorial en elaboración"
     },
     {
       "id": 17,
       "name": "Etiqueta cobertura",
-      "attribute": "EtqCob",
+      "attribute": "EetqCob",
       "description": "Etiqueta clase de cobertura de la Tierra"
-    },
-    {
-      "id": 18,
-      "name": "Etiqueta subclase cobertura",
-      "attribute": "EtqSubCob",
-      "description": "Etiqueta subclase de cobertura de la Tierra"
     },
     {
       "id": 19,
       "name": "Fecha censo",
-      "attribute": "FchCens",
+      "attribute": "FecCen",
       "description": "Fecha del censo"
     }
   ]
