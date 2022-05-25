@@ -52,7 +52,7 @@ export default function AttrDictionary({ abbreviatures, toggleEdit, serverReload
 				</thead>
 				<tbody>
 					{abbreviatures?.map((e: Abbreviature) => (
-					<tr key={`abbrev-${e.id}`}>
+						<tr key={`abbrev-${e.id}`}>
 							<td>{e.abbreviature}</td>
 							<td>{e.name}</td>
 							<td>
@@ -104,6 +104,7 @@ export function AbbrevEdit({ open, data, toggle }: any) {
 
 	useEffect(() => {
 		setState({ ...state, fieldErrors: {} });
+		setAlert(null!);
 		setIsNew(!data);
 		if (data) {
 			setFields(data);
@@ -128,8 +129,12 @@ export function AbbrevEdit({ open, data, toggle }: any) {
 			if (isNew) postService = postAddAbbreviature;
 			else postService = postEditAbbreviature;
 
-			postService(fields).then(async (res) => {
-				toggle();
+			postService(fields).then(async (res: any) => {
+				if (res.status === 200) {
+					toggle();
+				} else {
+					setAlert(res.description);
+				}
 			});
 		}
 	};

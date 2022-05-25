@@ -35,6 +35,7 @@ export default function AttrEdit({ open, data, toggle }: any) {
 	const [fields, setFields] = useState<any>({ id: 0, attribute: '', name: '', description: '' });
 
 	useEffect(() => {
+		setAlert(null!);
 		setState({ ...state, fieldErrors: {} });
 		setIsNew(!data?.id);
 		const nextData = Object.assign({ id: 0, attribute: '', name: '', description: '' }, data ?? {});
@@ -71,8 +72,12 @@ export default function AttrEdit({ open, data, toggle }: any) {
 			if (isNew) postService = postAddAttribute;
 			else postService = postEditAttribute;
 
-			postService(fields).then(async (res) => {
-				toggle();
+			postService(fields).then(async (res: any) => {
+				if (res.status === 200) {
+					toggle();
+				} else {
+					setAlert(res.description);
+				}
 			});
 		}
 	};

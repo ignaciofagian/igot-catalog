@@ -1,10 +1,10 @@
 {
-  "attrIdentity": 18,
-  "abbIdentity": 23,
+  "attrIdentity": 20,
+  "abbIdentity": 24,
   "abbreviatures": [
     {
       "id": 3,
-      "name": "Programa",
+      "name": "Programaaaaa",
       "abbreviature": "Prog",
       "description": "Programa"
     },
@@ -17,7 +17,7 @@
     {
       "id": 22,
       "name": "Etiqueta",
-      "abbreviature": "Eetq",
+      "abbreviature": "Ewtq",
       "description": ""
     },
     {
@@ -25,33 +25,15 @@
       "name": "nsadasdsd",
       "abbreviature": "Nan",
       "description": ""
+    },
+    {
+      "id": 24,
+      "name": "asdasd",
+      "abbreviature": "Anioa",
+      "description": ""
     }
   ],
   "attributes": [
-    {
-      "id": 1,
-      "name": "Alcance espaciala vv",
-      "attribute": "AlcEspVv",
-      "description": "Alcance espacialdd"
-    },
-    {
-      "id": 2,
-      "name": "Ambito aplicación",
-      "attribute": "AmbApl",
-      "description": "Ambito aplicación"
-    },
-    {
-      "id": 3,
-      "name": "Año construcción",
-      "attribute": "AnioCon",
-      "description": "Año construcción"
-    },
-    {
-      "id": 4,
-      "name": "Año conformación",
-      "attribute": "AnioCon",
-      "description": "Año conformación"
-    },
     {
       "id": 5,
       "name": "Cantidad de dormitorios",
@@ -63,12 +45,6 @@
       "name": "Cantidad viviendas",
       "attribute": "CanViv",
       "description": "Cantidad viviendas"
-    },
-    {
-      "id": 7,
-      "name": "Categoría del suelo",
-      "attribute": "CatDelSue",
-      "description": "Categoría del suelo"
     },
     {
       "id": 8,
@@ -116,12 +92,12 @@
       "id": 16,
       "name": "Etapa IOT elaboración",
       "attribute": "EtaIOTEla",
-      "description": "Etapa de los instrumentos de ordenamiento territorial en elaboración"
+      "description": "Etapa de los instrumentos de ordenamiento territorial en aaaaaaaaaaaaaaelaboración"
     },
     {
       "id": 17,
       "name": "Etiqueta cobertura",
-      "attribute": "EetqCob",
+      "attribute": "EwtqCob",
       "description": "Etiqueta clase de cobertura de la Tierra"
     },
     {
@@ -129,6 +105,18 @@
       "name": "Fecha censo",
       "attribute": "FecCen",
       "description": "Fecha del censo"
+    },
+    {
+      "id": 21,
+      "name": "ae",
+      "attribute": "Ae",
+      "description": "aeasad"
+    },
+    {
+      "id": 20,
+      "name": "asdsa ddd",
+      "attribute": "AsdDdd",
+      "description": "aaa"
     }
   ]
 }
