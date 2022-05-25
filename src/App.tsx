@@ -1,17 +1,17 @@
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Layout from './components/Layout';
-import HomePage from './pages/index';
+import { HashRouter, Route, Switch } from "react-router-dom";
+import Layout from "./components/Layout";
+import HomePage from "./pages/index";
 
 function App() {
-	return (
-		<BrowserRouter>
-			<Layout>
-				<Routes>
-					<Route path="/" element={<HomePage />} />
-				</Routes>
-			</Layout>
-		</BrowserRouter>
-	);
+  return (
+    <HashRouter>
+      <Switch>
+        <Layout>
+          <Route path="/" exact component={HomePage} />
+        </Layout>
+      </Switch>
+    </HashRouter>
+  );
 }
 
 export default App;

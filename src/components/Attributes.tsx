@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Attribute, getAttributeList } from '../services/api';
+import { store } from '../utils/attrCalculator';
 import AttrEdit, { IEditModal } from './AttrEdit';
 import AttrSuggest from './AttrSuggest';
 import AttrTable from './AttrTable';
@@ -14,6 +15,10 @@ export default function Attributes({ attributes, serverReload }: any) {
 	useEffect(() => {
 		serverReload('attributes');
 	}, []);
+
+	useEffect(() => {
+		store.attributes = attributes;
+	}, [attributes]);
 
 	const handleOnChange = (e: any) => {
 		setState({ ...state, text: e });

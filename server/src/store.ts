@@ -1,39 +1,36 @@
-import { writeFile, readFile } from 'fs/promises';
+import { writeFile, readFile } from "fs";
 export interface IStore<T> {
-	read(): Promise<T>;
-	write(obj: T): Promise<void>;
+  read(): Promise<T>;
+  write(obj: T): Promise<void>;
 }
 
 export class Store<T> implements IStore<T> {
-	filename: string;
+  filename: string;
 
-	constructor(filename: string) {
-		this.filename = filename;
-	}
+  constructor(filename: string) {
+    this.filename = filename;
+  }
 
-	async read(): Promise<T | null> {
-		let data;
+  async read(): Promise<T | null> {
+    return new Promise((res, rej) => {
+      readFile(this.filename, { encoding: "utf-8" }, (err, data?: string) => {
+        if (err) {
+          throw err;
+        }
+        if (data === null) {
+          return res(null);
+        } else {
+          return res(JSON.parse(data));
+        }
+      });
+    });
+  }
 
-		try {
-			data = await readFile(this.filename, 'utf-8');
-			if (data === null) {
-				return null;
-			} else {
-				return JSON.parse(data);
-			}
-		} catch (e) {
-			if ((e as NodeJS.ErrnoException).code === 'ENOENT') {
-				return null;
-			}
-			throw e;
-		}
-	}
-
-	async write(obj: T): Promise<void> {
-		try {
-			await writeFile(this.filename, JSON.stringify(obj, null, 2));
-		} catch (err) {
-			console.log(err);
-		}
-	}
+  async write(obj: T): Promise<void> {
+    writeFile(this.filename, JSON.stringify(obj, null, 2), (err) => {
+      if (err) {
+        throw err;
+      }
+    });
+  }
 }
