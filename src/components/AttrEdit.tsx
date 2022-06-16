@@ -89,7 +89,7 @@ export default function AttrEdit({ open, data, toggle }: any) {
 		if (name === 'name') {
 			const attrResult: AttrResult = calculate(value);
 			if (attrResult.status === 200) {
-				const currentAttr = attrResult.parts?.map((e: AttrParts) => e.current).join('');
+				const currentAttr = attrResult.attribute;
 				if (currentAttr != fields.attribute) {
 					customFields.attribute = '';
 					setTimeout(() => {
@@ -120,7 +120,7 @@ export default function AttrEdit({ open, data, toggle }: any) {
 					<Col>
 						{alert && <Alert color="danger">{alert}</Alert>}
 						<FormGroup>
-							<Label>Nombre (Max. 3 palabras)</Label>
+							<Label>Nombre (Max. 10 palabras)</Label>
 							<Input
 								type="text"
 								invalid={!!errors.name}

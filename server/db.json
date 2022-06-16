@@ -15,28 +15,10 @@
       "description": "Construccion"
     },
     {
-      "id": 4,
-      "name": "Terreno",
-      "abbreviature": "Terr",
-      "description": "Terreno"
-    },
-    {
       "id": 3,
       "name": "Año",
       "abbreviature": "Ano",
       "description": "Año"
-    },
-    {
-      "id": 2,
-      "name": "Programa",
-      "abbreviature": "Prog",
-      "description": "Programa"
-    },
-    {
-      "id": 1,
-      "name": "Proyecto",
-      "abbreviature": "Proy",
-      "description": "Proyecto"
     }
   ],
   "attributes": [
@@ -115,13 +97,13 @@
     {
       "id": 33,
       "name": "Número Proyecto",
-      "attribute": "NumProy",
+      "attribute": "NumPro",
       "description": "Número proyecto"
     },
     {
       "id": 32,
       "name": "Número Programa",
-      "attribute": "NumProg",
+      "attribute": "NumPro",
       "description": "Número programa"
     },
     {
@@ -133,13 +115,13 @@
     {
       "id": 30,
       "name": "Nombre Proyecto",
-      "attribute": "NomProy",
+      "attribute": "NomPro",
       "description": "Nombre proyecto"
     },
     {
       "id": 29,
       "name": "Nombre Programa",
-      "attribute": "NomProg",
+      "attribute": "NomPro",
       "description": "Nombre programa"
     },
     {
@@ -223,13 +205,13 @@
     {
       "id": 15,
       "name": "Estado terreno",
-      "attribute": "EstTerr",
+      "attribute": "EstTer",
       "description": "Estado terreno"
     },
     {
       "id": 14,
       "name": "Estado Proyecto Constructivo",
-      "attribute": "EstProyCon",
+      "attribute": "EstProCon",
       "description": "Estado de avance del proyecto constructivo"
     },
     {

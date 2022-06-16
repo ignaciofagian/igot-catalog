@@ -35,7 +35,6 @@ export default function Attributes({ attributes, serverReload }: any) {
 			setEditModal({ open: true, data: attr });
 		} else {
 			const customData: any = {};
-			debugger;
 			if (!editModal.open) {
 				if (initialText) {
 					customData.name = initialText;

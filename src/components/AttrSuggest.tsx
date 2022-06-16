@@ -154,11 +154,15 @@ export function SuggestResult({ value, alert }: any) {
               <div>{"->"}</div>
               <div>
                 {value?.parts?.map((e: AttrParts) => (
-                  <span
-                    className={e.isAbbreviation ? style.abbrev : style.normal}
-                  >
-                    {e.current}
-                  </span>
+                  <>
+                    {e.wordType === "StopWord" && <span className={style.stopWord}>{e.original}</span>}
+                    {e.wordType === "Abbreviation" && (
+                      <span className={style.abbrev}>{e.current}</span>
+                    )}
+                    {e.wordType === "Default" && (
+                      <span className={style.normal}>{e.current}</span>
+                    )}
+                  </>
                 ))}
               </div>
             </div>

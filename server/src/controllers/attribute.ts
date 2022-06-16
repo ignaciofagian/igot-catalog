@@ -195,7 +195,7 @@ class AttributeController {
       .filter((e: string) => e.length > 0);
 
     if (words.length > 3) {
-      return [{ status: 400, description: "No se puede ingresar mas de 3 palabras." }];
+      return [{ status: 400, description: "No se puede ingresar mas de 10 palabras." }];
     }
 
     return [{ status: 200 }, words];
