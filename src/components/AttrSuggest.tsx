@@ -150,12 +150,19 @@ export function SuggestResult({ value, alert }: any) {
               )}
             </div>
             <div className={style.explain}>
-              <div>{value?.attribute}</div>
+              <div>
+                {value?.parts
+                  ?.filter((e: AttrParts) => e.wordType != "StopWord")
+                  .map((e: AttrParts) => e.original)
+                  .join(" ")}
+              </div>
               <div>{"->"}</div>
               <div>
                 {value?.parts?.map((e: AttrParts) => (
                   <>
-                    {e.wordType === "StopWord" && <span className={style.stopWord}>{e.original}</span>}
+                    {e.wordType === "StopWord" && (
+                      <span className={style.stopWord}>{e.original}</span>
+                    )}
                     {e.wordType === "Abbreviation" && (
                       <span className={style.abbrev}>{e.current}</span>
                     )}
@@ -165,6 +172,8 @@ export function SuggestResult({ value, alert }: any) {
                   </>
                 ))}
               </div>
+              <div>{"->"}</div>
+              <div>{value?.attribute}</div>
             </div>
           </div>
         </Col>

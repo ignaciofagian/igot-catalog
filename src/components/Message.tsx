@@ -67,11 +67,11 @@ const Message = forwardRef((_, ref) => {
 			</ModalBody>
 			<ModalFooter>
 				<Button color="light" onClick={() => handleResponse(false)}>
-					Close
+					Cerrar
 				</Button>
 				{state.onAction && (
 					<Button color={clx[state.type]?.btn} onClick={() => handleResponse(true)}>
-						Confirm
+						Confirmar
 					</Button>
 				)}
 			</ModalFooter>

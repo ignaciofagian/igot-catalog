@@ -1,295 +1,264 @@
 {
-  "attrIdentity": 45,
-  "abbIdentity": 6,
-  "abbreviatures": [
-    {
-      "id": 6,
-      "name": "Conformacion",
-      "abbreviature": "Conf",
-      "description": "Conformacion"
-    },
-    {
-      "id": 5,
-      "name": "Construccion",
-      "abbreviature": "Cons",
-      "description": "Construccion"
-    },
-    {
-      "id": 3,
-      "name": "Año",
-      "abbreviature": "Ano",
-      "description": "Año"
-    }
-  ],
+  "attrIdentity": 136,
+  "abbIdentity": 2,
+  "abbreviatures": [],
   "attributes": [
     {
-      "id": 45,
-      "name": "Viviendas Censales",
-      "attribute": "VivCen",
+      "id": 134,
+      "name": "Viviendas censales",
+      "attribute": "ViviCenss",
       "description": "Viviendas censales"
     },
     {
-      "id": 44,
+      "id": 133,
       "name": "Superficie m2",
-      "attribute": "SupM2",
+      "attribute": "SupeM2",
       "description": "Superficie m2"
     },
     {
-      "id": 43,
-      "name": "Superficie Km2",
-      "attribute": "SupKm2",
+      "id": 132,
+      "name": "Superficie km2",
+      "attribute": "SupeKm2",
       "description": "Superficie km2"
     },
     {
-      "id": 42,
-      "name": "Subclase Cobertura Tierra",
-      "attribute": "SubCobTie",
+      "id": 131,
+      "name": "Subclase cobertura Tierra",
+      "attribute": "SCT",
       "description": "Subclase de cobertura de la Tierra"
     },
     {
-      "id": 41,
-      "name": "Sistema Sonstructivo",
-      "attribute": "SisSon",
+      "id": 130,
+      "name": "Sistema constructivo",
+      "attribute": "SistCons",
       "description": "Sistema constructivo"
     },
     {
-      "id": 40,
+      "id": 129,
       "name": "Potencialmente transformable",
-      "attribute": "PotTra",
+      "attribute": "PoteTran",
       "description": "Potencialmente transformable"
     },
     {
-      "id": 39,
-      "name": "Población Censal",
-      "attribute": "PobCen",
+      "id": 128,
+      "name": "Poblacion censal",
+      "attribute": "PoblCens",
       "description": "Población censal"
     },
     {
-      "id": 38,
-      "name": "Padrón Matriz",
-      "attribute": "PadMat",
+      "id": 127,
+      "name": "Padron matriz",
+      "attribute": "PadrMatr",
       "description": "Padrón matriz"
     },
     {
-      "id": 37,
-      "name": "Padrón",
-      "attribute": "Padron",
+      "id": 126,
+      "name": "Padron",
+      "attribute": "Padr",
       "description": "Padrón"
     },
     {
-      "id": 36,
-      "name": "Organismo Ejecutor",
-      "attribute": "OrgEje",
+      "id": 125,
+      "name": "Organismo ejecutor",
+      "attribute": "OrgaEjec",
       "description": "Organismo ejecutor"
     },
     {
-      "id": 35,
+      "id": 124,
       "name": "Organismo administrador",
-      "attribute": "OrgAdm",
+      "attribute": "OrgaAdmi",
       "description": "Organismo administrador"
     },
     {
-      "id": 34,
+      "id": 123,
       "name": "Observaciones",
-      "attribute": "Obs",
+      "attribute": "Obses",
       "description": "Observaciones"
     },
     {
-      "id": 33,
-      "name": "Número Proyecto",
-      "attribute": "NumPro",
+      "id": 122,
+      "name": "Numero proyecto",
+      "attribute": "NumeProy",
       "description": "Número proyecto"
     },
     {
-      "id": 32,
-      "name": "Número Programa",
-      "attribute": "NumPro",
+      "id": 121,
+      "name": "Numero programa",
+      "attribute": "NumeProg",
       "description": "Número programa"
     },
     {
-      "id": 31,
-      "name": "Número Del Normativo",
-      "attribute": "NumDelNor",
+      "id": 120,
+      "name": "Numero documento normativo",
+      "attribute": "NDN",
       "description": "Número del documento normativo"
     },
     {
-      "id": 30,
-      "name": "Nombre Proyecto",
-      "attribute": "NomPro",
-      "description": "Nombre proyecto"
-    },
-    {
-      "id": 29,
-      "name": "Nombre Programa",
-      "attribute": "NomPro",
-      "description": "Nombre programa"
-    },
-    {
-      "id": 28,
+      "id": 119,
       "name": "Nombre",
-      "attribute": "Nombre",
+      "attribute": "Nomb",
       "description": "Nombre"
     },
     {
-      "id": 27,
-      "name": "Macro Clase Cobertura",
-      "attribute": "MacClaCob",
+      "id": 118,
+      "name": "Macroclase cobertura Tierra",
+      "attribute": "MCT",
       "description": "Macroclase de cobertura de la Tierra"
     },
     {
-      "id": 26,
+      "id": 117,
       "name": "Localidad",
-      "attribute": "Localidad",
+      "attribute": "Loca",
       "description": "Localidad"
     },
     {
-      "id": 25,
-      "name": "Id Instrumento",
-      "attribute": "IdIns",
+      "id": 116,
+      "name": "ID instrumento",
+      "attribute": "IDInst",
       "description": "ID instrumento"
     },
     {
-      "id": 24,
-      "name": "Id Objeto",
-      "attribute": "IdObj",
+      "id": 115,
+      "name": "ID objeto",
+      "attribute": "IDObje",
       "description": "ID del objeto"
     },
     {
-      "id": 23,
-      "name": "Hogares Censales",
-      "attribute": "HogCen",
+      "id": 114,
+      "name": "Hogares censales",
+      "attribute": "HogaCenss",
       "description": "Hogares censales"
     },
     {
-      "id": 22,
-      "name": "Fecha Inicio Obra",
-      "attribute": "FecIniObr",
+      "id": 113,
+      "name": "Fecha inicio obra",
+      "attribute": "FIO",
       "description": "Fecha inicio de obra"
     },
     {
-      "id": 21,
-      "name": "Fecha Entrega Obra",
-      "attribute": "FecEntObr",
+      "id": 112,
+      "name": "Fecha entrega obra",
+      "attribute": "FEO",
       "description": "Fecha entrega de obra"
     },
     {
-      "id": 20,
-      "name": "Fecha Documento Normativo",
-      "attribute": "FecDocNor",
+      "id": 111,
+      "name": "Fecha documento normativo",
+      "attribute": "FDN",
       "description": "Fecha documento normativo"
     },
     {
-      "id": 19,
-      "name": "Fecha Censo",
-      "attribute": "FecCen",
+      "id": 110,
+      "name": "Fecha censo",
+      "attribute": "FechCens",
       "description": "Fecha del censo"
     },
     {
-      "id": 18,
-      "name": "Etiqueta subclase  cobertura",
-      "attribute": "EtiSubCob",
+      "id": 109,
+      "name": "Etiqueta subclase cobertura Tierra",
+      "attribute": "ESCT",
       "description": "Etiqueta subclase de cobertura de la Tierra"
     },
     {
-      "id": 17,
-      "name": "Etiqueta cobertura",
-      "attribute": "EtiCob",
+      "id": 108,
+      "name": "Etiqueta clase cobertura Tierra",
+      "attribute": "ECCT",
       "description": "Etiqueta clase de cobertura de la Tierra"
     },
     {
-      "id": 16,
-      "name": "Etapa IOT elaboración",
-      "attribute": "EtaIOTEla",
+      "id": 107,
+      "name": "Etapa instrumentos ordenamiento territorial elaboracion",
+      "attribute": "EIOTE",
       "description": "Etapa de los instrumentos de ordenamiento territorial en elaboración"
     },
     {
-      "id": 15,
+      "id": 106,
       "name": "Estado terreno",
-      "attribute": "EstTer",
+      "attribute": "EstaTerr",
       "description": "Estado terreno"
     },
     {
-      "id": 14,
-      "name": "Estado Proyecto Constructivo",
-      "attribute": "EstProCon",
+      "id": 105,
+      "name": "Estado avance proyecto constructivo",
+      "attribute": "EAPC",
       "description": "Estado de avance del proyecto constructivo"
     },
     {
-      "id": 13,
-      "name": "Documento Normativo",
-      "attribute": "DocNor",
+      "id": 104,
+      "name": "Documento normativo",
+      "attribute": "DocuNorm",
       "description": "Documento normativo"
     },
     {
-      "id": 12,
+      "id": 103,
       "name": "Direccion",
-      "attribute": "Direccion",
+      "attribute": "Dire",
       "description": "Dirección"
     },
     {
-      "id": 11,
+      "id": 102,
       "name": "Departamento",
-      "attribute": "Dep",
+      "attribute": "Depa",
       "description": "Departamento"
     },
     {
-      "id": 10,
-      "name": "Código habitacional",
-      "attribute": "CodHab",
+      "id": 101,
+      "name": "Codigo conjunto habitacional",
+      "attribute": "CCH",
       "description": "Código conjunto habitacional"
     },
     {
-      "id": 9,
+      "id": 100,
       "name": "Clase cobertura Tierra",
-      "attribute": "ClaCobTie",
+      "attribute": "CCT",
       "description": "Clase de la cobertura de la Tierra"
     },
     {
-      "id": 8,
-      "name": "Cobertura impermeable urbana",
-      "attribute": "CobImpUrb",
+      "id": 99,
+      "name": "Clase cobertura area impermeable urbana",
+      "attribute": "CCAIU",
       "description": "Clase cobertura de área impermeable urbana"
     },
     {
-      "id": 7,
-      "name": "Categoría suelo",
-      "attribute": "CatSue",
+      "id": 98,
+      "name": "Categoria suelo",
+      "attribute": "CateSuel",
       "description": "Categoría del suelo"
     },
     {
-      "id": 6,
+      "id": 97,
       "name": "Cantidad viviendas",
-      "attribute": "CanViv",
+      "attribute": "CantVivis",
       "description": "Cantidad viviendas"
     },
     {
-      "id": 5,
+      "id": 96,
       "name": "Cantidad dormitorios",
-      "attribute": "CanDor",
+      "attribute": "CantDorms",
       "description": "Cantidad de dormitorios"
     },
     {
-      "id": 4,
-      "name": "Año conformación",
+      "id": 95,
+      "name": "Ano conformacion",
       "attribute": "AnoConf",
       "description": "Año de conformación"
     },
     {
-      "id": 3,
-      "name": "Año construcción",
+      "id": 94,
+      "name": "Ano construccion",
       "attribute": "AnoCons",
       "description": "Año construcción"
     },
     {
-      "id": 2,
-      "name": "Ambito aplicación",
-      "attribute": "AmbApl",
+      "id": 93,
+      "name": "Ambito aplicacion",
+      "attribute": "AmbiApli",
       "description": "Ámbito de aplicación"
     },
     {
-      "id": 1,
+      "id": 92,
       "name": "Alcance espacial",
-      "attribute": "AlcEsp",
+      "attribute": "AlcaEspa",
       "description": "Alcance espacial"
     }
   ]

@@ -36,10 +36,10 @@ export async function loadFromExcel(fileName: string) {
     ],
   });
 
-  for (const row of data["Hoja2"]) {
-    const result = await ctrlAttribute.addAbbreviature(row);
-    console.log(`${row.name} -> ${result.status} ${result.description}`);
-  }
+  // for (const row of data["Hoja2"]) {
+  //   const result = await ctrlAttribute.addAbbreviature(row);
+  //   console.log(`${row.name} -> ${result.status} ${result.description}`);
+  // }
 
   for (const row of data["Hoja1"]) {
     const result = await ctrlAttribute.addAttribute(row);

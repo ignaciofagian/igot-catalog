@@ -113,7 +113,7 @@ export default function AttrEdit({ open, data, toggle }: any) {
 	return (
 		<Modal isOpen={open} toggle={toggle} unmountOnClose centered>
 			<ModalHeader toggle={toggle}>
-				{isNew ? 'Ingresa los datos del atributo a agregar' : 'Edicion de atributo'}
+				{isNew ? 'Ingresa los datos del atributo a agregar' : 'Edición de atributo'}
 			</ModalHeader>
 			<ModalBody>
 				<Row>
