@@ -156,7 +156,7 @@ export function SuggestResult({ value, alert }: any) {
                   .map((e: AttrParts) => e.original)
                   .join(" ")}
               </div>
-              <div>{"->"}</div>
+              <div className={style.arrow}>{"->"}</div>
               <div>
                 {value?.parts?.map((e: AttrParts) => (
                   <>
@@ -172,7 +172,7 @@ export function SuggestResult({ value, alert }: any) {
                   </>
                 ))}
               </div>
-              <div>{"->"}</div>
+              <div className={style.arrow}>{"->"}</div>
               <div>{value?.attribute}</div>
             </div>
           </div>

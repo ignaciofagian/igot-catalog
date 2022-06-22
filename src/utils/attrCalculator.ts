@@ -68,7 +68,7 @@ export function calculate(raw: string): AttrResult {
       // default
       else {
         parts.push({
-          current: word,
+          current: word.toLocaleLowerCase(),
           original: word,
           wordType: "Default",
         });
@@ -136,7 +136,10 @@ function validateInputWords(raw: string): [Result, any?] {
     // filter 0 length
     .filter((e: string) => e.length > 0);
 
-  if (words.length > 10) {
+  // count valid words
+  const totalWords = words.filter((word: string) => !stopWords.includes(word.toLocaleLowerCase())).length
+
+  if (totalWords > 10) {
     return [
       { status: 400, description: "No se puede ingresar mas de 10 palabras." },
     ];

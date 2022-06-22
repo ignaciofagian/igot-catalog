@@ -97,11 +97,15 @@
   .stopWord {
     color: gray;
     text-decoration: line-through;
-		margin-right: 5px;
+    margin-right: 5px;
   }
 
   .normal {
     margin-right: 5px;
+  }
+
+  .arrow {
+    min-width: 21px;
   }
 }
 
